@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block javascript %}
+  <script src="{% static 'js/sneeze.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+  <h1 class="page-header">Reports</h1>
+
+  <p>
+    <!-- <button type="button" -->
+    <!-- 	    class="btn btn-primary js-create-entity" -->
+    <!-- 	    data-url="{% url 'report_create' %}"> -->
+    <!--   New -->
+    <!-- </button> -->
+  </p>
+
+  <table class="table" id="entity-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fiscal code</th>
+	<th>Date</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% include 'sneeze/report_list.partial.html' %}
+    </tbody>
+  </table>
+
+  <div class="modal fade" id="modal-entity">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+      </div>
+    </div>
+  </div>
+{% endblock %}
