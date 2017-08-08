@@ -7,12 +7,12 @@
 {% endblock %}
 
 {% block content %}
-  <h1 class="page-header">Reports</h1>
+  <h1 class="page-header">Report detail</h1>
 
   <p>
     <button type="button"
     	    class="btn btn-primary js-create-entity"
-    	    data-url="{% url 'report_create' %}">
+    	    data-url="">
       New
     </button>
   </p>
@@ -20,15 +20,13 @@
   <table class="table" id="entity-table">
     <thead>
       <tr>
-        <th>ID</th>
-	<th>Date</th>
-	<th>Full name</th>
-        <th>Fiscal code</th>
+        <th>Allergen</th>
+	<th>Value</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      {% include 'sneeze/report_list.partial.html' %}
+      {% include 'sneeze/report_detail.partial.html' %}
     </tbody>
   </table>
 

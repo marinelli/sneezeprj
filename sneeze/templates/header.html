@@ -17,6 +17,9 @@
 	<li{% if request.path == '/patient/' %} class="active"{% endif %}>
           <a href="{% url 'patient_list' %}">Patients</a>
         </li>
+	<li{% if request.path == '/report/' %} class="active"{% endif %}>
+          <a href="{% url 'report_list' %}">Reports</a>
+        </li>
       </ul>
     </div>
   </div>

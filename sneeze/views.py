@@ -3,8 +3,8 @@ from django.http            import JsonResponse, Http404
 from django.shortcuts       import render
 from django.template.loader import render_to_string
 
-from .forms                 import AllergenForm, PatientForm
-from .models                import Allergen, Patient, Report
+from .forms                 import AllergenForm, PatientForm, ReportForm
+from .models                import Allergen, Patient, Report, AllergyTest
 
 
 
@@ -171,9 +171,68 @@ def patient_delete (request, pk) :
 #
 
 
-# def report_list (request) :
+def report_list (request) :
 
-#     reports = Report.objects.all ()
+    reports = Report.objects.all ()
 
-#     return render (request, 'sneeze/report_list.html', { 'reports': reports })
+    return render (request, 'sneeze/report_list.html', { 'reports': reports })
+
+
+
+def save_report_form (request, form, template_name) :
+
+    data = dict ()
+
+    if request.method == 'POST' :
+        if form.is_valid () :
+            form.save ()
+            data ['form_is_valid'] = True
+            reports = Report.objects.all ()
+            data ['html_list'] = render_to_string ('sneeze/report_list.partial.html', { 'reports': reports })
+        else :
+            data ['form_is_valid'] = False
+
+    context = { 'form': form }
+    data ['html_form'] = render_to_string (template_name, context, request = request)
+
+    return JsonResponse (data)
+
+
+
+def report_create (request) :
+    if request.method == 'POST' :
+        form = ReportForm (request.POST)
+    else :
+        form = ReportForm ()
+
+    return save_report_form (request, form, 'sneeze/report_create.partial.html')
+
+
+
+def report_detail (request, pk) :
+
+    allergy_tests = AllergyTest.objects.filter (report = pk)
+
+    return render (request, 'sneeze/report_detail.html', { 'allergy_tests': allergy_tests })
+
+
+
+def report_delete (request, pk) :
+    try :
+        cur_report = Report.objects.get (pk = pk)
+    except Report.DoesNotExist :
+        raise Http404 ("Report does not exist")
+
+    data = dict ()
+
+    if request.method == 'POST' :
+        cur_report.delete ()
+        data ['form_is_valid'] = True
+        reports = Report.objects.all ()
+        data ['html_list'] = render_to_string ('sneeze/report_list.partial.html', { 'reports': reports })
+    else :
+        context = { 'report': cur_report }
+        data ['html_form'] = render_to_string ('sneeze/report_delete.partial.html', context, request = request)
+
+    return JsonResponse (data)
 

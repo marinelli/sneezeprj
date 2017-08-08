@@ -1,5 +1,7 @@
 
-from django.db import models
+from django.db    import models
+from django.utils import timezone
+
 
 
 
@@ -29,7 +31,7 @@ class Report (models.Model) :
 
     patient = models.ForeignKey (Patient, on_delete = models.CASCADE)
 
-    date    = models.DateTimeField ()
+    date    = models.DateField (default = timezone.now)
 
 
 

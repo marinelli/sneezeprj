@@ -27,10 +27,10 @@ urlpatterns.extend ([
 ])
 
 
-# urlpatterns.extend ([
-#     url ( r'^report/$'                      , views.report_list     , name = 'report_list'     ),
-#     url ( r'^report/create/$'               , views.report_create   , name = 'report_create'   ),
-#     url ( r'^report/(?P<pk>\d+)/$'          , views.report_detail   , name = 'report_detail'   ),
-#     url ( r'^report/(?P<pk>\d+)/delete/$'   , views.report_delete   , name = 'report_delete'   ),
-# ])
+urlpatterns.extend ([
+    url ( r'^report/$'                      , views.report_list     , name = 'report_list'     ),
+    url ( r'^report/create/$'               , views.report_create   , name = 'report_create'   ),
+    url ( r'^report/(?P<pk>\d+)/$'          , views.report_detail   , name = 'report_detail'   ),
+    url ( r'^report/(?P<pk>\d+)/delete/$'   , views.report_delete   , name = 'report_delete'   ),
+])
 
