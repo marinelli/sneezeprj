@@ -38,7 +38,7 @@ class Report (models.Model) :
 class AllergyTest (models.Model) :
 
     def __str__ (self) :
-        return "%s: %s" % (allergen, value)
+        return "%s: %s" % (self.allergen, self.value)
 
     report   = models.ForeignKey (Report, on_delete = models.CASCADE)
 

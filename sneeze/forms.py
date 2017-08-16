@@ -1,6 +1,6 @@
 
 from django  import forms
-from .models import Allergen, Patient, Report
+from .models import Allergen, Patient, Report, AllergyTest
 
 
 
@@ -23,4 +23,11 @@ class ReportForm (forms.ModelForm) :
     class Meta :
         model  = Report
         fields = ( 'patient', 'date' )
+
+
+
+class AllergyTestForm (forms.ModelForm) :
+    class Meta :
+        model  = AllergyTest
+        fields = ( 'allergen', 'value' )
 

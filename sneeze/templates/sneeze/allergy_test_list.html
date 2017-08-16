@@ -7,13 +7,32 @@
 {% endblock %}
 
 {% block content %}
-  <h1 class="page-header">Report detail</h1>
+  <h1 class="page-header">Report details</h1>
+
+  <table class="table" id="table-report-summary">
+    <thead>
+      <tr>
+        <th>ID</th>
+	<th>Date</th>
+	<th>Full name</th>
+        <th>Fiscal code</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+	<td>{{ report.id }}</td>
+	<td>{{ report.date }}</td>
+	<td>{{ report.patient.full_name }}</td>
+	<td>{{ report.patient.fiscal_code }}</td>
+      </tr>
+    </tbody>
+  </table>
 
   <p>
     <button type="button"
     	    class="btn btn-primary js-create-entity"
-    	    data-url="">
-      New
+    	    data-url="{% url 'allergy_test_create' report.id %}">
+      Add new result
     </button>
   </p>
 
@@ -26,7 +45,7 @@
       </tr>
     </thead>
     <tbody>
-      {% include 'sneeze/report_detail.partial.html' %}
+      {% include 'sneeze/allergy_test_list.partial.html' %}
     </tbody>
   </table>
 
