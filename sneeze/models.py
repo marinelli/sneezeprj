@@ -2,6 +2,8 @@
 from django.db    import models
 from django.utils import timezone
 
+from .validators  import validate_fiscal_code
+
 
 
 
@@ -10,7 +12,10 @@ class Patient (models.Model) :
     def __str__ (self) :
         return self.full_name
 
-    fiscal_code = models.CharField (max_length = 16, primary_key = True)
+    fiscal_code = models.CharField ( max_length  = 16
+                                   , primary_key = True
+                                   , validators  = [ validate_fiscal_code ]
+                                   )
 
     full_name   = models.CharField (max_length = 100)
 
